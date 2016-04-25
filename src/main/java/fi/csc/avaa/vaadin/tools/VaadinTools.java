@@ -5,6 +5,7 @@ package fi.csc.avaa.vaadin.tools;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 import java.util.TreeSet;
 
 import org.vaadin.addons.comboboxmultiselect.ComboBoxMultiselect;
@@ -123,13 +124,13 @@ public final class VaadinTools {
 		return select;
 	}
 	
-	public static ComboBoxMultiselect createMultiselectComboBox(TreeSet<String> itemIds, TreeSet<String> itemCaptions, String inputPrompt, int pixelWidth) {
+	public static ComboBoxMultiselect createMultiselectComboBox(List<String> itemIds, List<String> itemCaptions, String inputPrompt, int pixelWidth) {
 		ComboBoxMultiselect cbms = createMultiselectComboBox(itemIds, itemCaptions, inputPrompt);
 		cbms.setWidth(pixelWidth, Unit.PIXELS);
 		return cbms;
 	}
 	
-	public static ComboBoxMultiselect createMultiselectComboBox(TreeSet<String> itemIds, TreeSet<String> itemCaptions, String inputPrompt) {
+	public static ComboBoxMultiselect createMultiselectComboBox(List<String> itemIds, List<String> itemCaptions, String inputPrompt) {
 		if(itemIds.size() != itemCaptions.size()) {
 			return null;
 		}
