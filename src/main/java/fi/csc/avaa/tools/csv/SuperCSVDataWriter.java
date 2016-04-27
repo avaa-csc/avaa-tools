@@ -64,7 +64,9 @@ public class SuperCSVDataWriter {
 			}
 
 			for (Map<String, Object> dataRow : dataToWrite) {
-				mapWriter.write(convertMap(dataRow), headers, processors);
+				mapWriter.write(dataRow.entrySet().stream().filter(e -> e.getValue() != null).collect(Collectors.toMap
+						(e -> e.getKey(), e -> e.getValue().toString().replaceAll("\\[|\\]", "").replaceAll(",", ";"))
+				), headers, processors);
 			}
 		} catch (IOException e) {
 			log.error("Unable to write data to CSV");
@@ -105,8 +107,8 @@ public class SuperCSVDataWriter {
 			String key = entry.getKey();
 			Object valueObject = entry.getValue();
 			String valueString = null;
-			if(valueObject != null){
-				valueString =  valueObject.toString().replaceAll("\\[|\\]", "").replaceAll(",", ";");
+			if (valueObject != null) {
+				valueString = valueObject.toString().replaceAll("\\[|\\]", "").replaceAll(",", ";");
 			}
 			modified.put(key, valueString);
 		}
