@@ -64,7 +64,7 @@ public class SuperCSVDataWriter {
 			}
 
 			for (Map<String, Object> dataRow : dataToWrite) {
-				mapWriter.write(dataRow, headers, processors);
+				mapWriter.write(convertMap(dataRow), headers, processors);
 			}
 		} catch (IOException e) {
 			log.error("Unable to write data to CSV");
@@ -96,5 +96,20 @@ public class SuperCSVDataWriter {
 			return false;
 		}
 		return true;
+	}
+
+	private Map<String, String> convertMap(Map<String, Object> initialMap) {
+		Map<String, String> modified = new HashMap<>();
+
+		for (Map.Entry<String, Object> entry : initialMap.entrySet()) {
+			String key = entry.getKey();
+			Object valueObject = entry.getValue();
+			String valueString = null;
+			if(valueObject != null){
+				valueString =  valueObject.toString().replaceAll("\\[|\\]", "").replaceAll(",", ";");
+			}
+			modified.put(key, valueString);
+		}
+		return modified;
 	}
 }

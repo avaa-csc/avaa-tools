@@ -26,7 +26,11 @@ public abstract class Searcher<T, U extends SearchBean> {
 	public List<T> getSearchResults() {
 		return searchResults;
 	}
-	
+
+	public void setSearchResults(List<T> searchResults) {
+		this.searchResults = searchResults;
+	}
+
 	protected boolean doesMultiLingualFieldContainValue(Translator translator, String searchStr, String fieldValueTranslationKey) {
 		if(StringTools.isEmptyOrNull(fieldValueTranslationKey)) {
 			return false;
