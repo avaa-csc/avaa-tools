@@ -18,7 +18,6 @@ public class ResultGridWrapper<T, U> extends VerticalLayout {
 
 	private static final long serialVersionUID = 1L;
 	private ResultControlRow<U> controlRow;
-	private ResultControlSubscriptionCostsRow<U> controlRowSubscriptionCostsRow;
 	private AvaaBaseGrid<T, U> grid;
 	
 	public ResultGridWrapper(AvaaBaseGrid<T, U> grid) {
@@ -34,12 +33,6 @@ public class ResultGridWrapper<T, U> extends VerticalLayout {
 		this(grid);
 		this.controlRow = controlRow;
 		addComponentAsFirst(controlRow);
-	}
-
-	public ResultGridWrapper(AvaaBaseGrid<T, U> grid, ResultControlSubscriptionCostsRow<U> controlRowSubscriptionCostsRow) {
-		this(grid);
-		this.controlRowSubscriptionCostsRow = controlRowSubscriptionCostsRow;
-		addComponentAsFirst(controlRowSubscriptionCostsRow);
 	}
 
 	public void populateGridWithItems(Collection<U> items) {
@@ -62,14 +55,5 @@ public class ResultGridWrapper<T, U> extends VerticalLayout {
 
 	public ResultControlRow<U> getCurrentControlRow() {
 		return controlRow;
-	}
-
-	public ResultControlSubscriptionCostsRow<U> getCurrentControlSubscriptionCostsRow() {
-		return controlRowSubscriptionCostsRow;
-	}
-
-	public void setNewControlRow(ResultControlSubscriptionCostsRow<U> newControlRowSubscriptionCostsRow) {
-		super.replaceComponent(controlRowSubscriptionCostsRow, newControlRowSubscriptionCostsRow);
-		controlRowSubscriptionCostsRow = newControlRowSubscriptionCostsRow;
 	}
 }
