@@ -31,6 +31,7 @@ public abstract class ResultControlRow<T> extends HorizontalLayout {
 	protected Button csvBtn;
 	protected Translator translator;
 	protected ChooseCSVFieldsWindow<T> csvWindow;
+	protected Label label;
 
 	/**
 	 * Use null for printBtn or csvBtn or csvWindow when those functionalities not needed.
@@ -48,6 +49,15 @@ public abstract class ResultControlRow<T> extends HorizontalLayout {
 		if(bottomMargin) {
 			setMargin(new MarginInfo(false, false, true, false));
 		}
+		setSizeFull();
+		setSpacing(true);
+		setResponsive(true);
+	}
+
+	public ResultControlRow(Translator translator, Label label, Button csvBtn) {
+		this.translator = translator;
+		this.label = label;
+		this.csvBtn = csvBtn;
 		setSizeFull();
 		setSpacing(true);
 		setResponsive(true);
@@ -76,6 +86,9 @@ public abstract class ResultControlRow<T> extends HorizontalLayout {
 						});
 						btnLayout.addComponent(printBtn);
 					}
+					if(label != null){
+						btnLayout.addComponent(label);
+					}
 					if(csvBtn != null) {
 						if(csvWindow != null) {
 							csvBtn.addClickListener(e -> {
@@ -86,7 +99,7 @@ public abstract class ResultControlRow<T> extends HorizontalLayout {
 					}
 
 					addComponents(resultAmtText, btnLayout);
-					setExpandRatio(resultAmtText, 3.0f);
+					setExpandRatio(resultAmtText, 2.0f);
 					setExpandRatio(btnLayout, 1.0f);
 					setComponentAlignment(btnLayout, Alignment.MIDDLE_RIGHT);
 				} else {
