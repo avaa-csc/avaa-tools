@@ -59,4 +59,8 @@ public class HorizontalKeyValueComponent extends CustomComponent {
 	public Label getKey() {
 		return key;
 	}
+
+	public HorizontalLayout getBaseLayout() {
+		return baseLayout;
+	}
 }
