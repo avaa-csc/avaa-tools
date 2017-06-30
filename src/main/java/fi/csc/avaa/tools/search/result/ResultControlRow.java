@@ -29,7 +29,7 @@ public abstract class ResultControlRow<T> extends HorizontalLayout {
 	protected HorizontalLayout btnLayout;
 	protected Button printBtn;
 	protected Button csvBtn;
-	protected Translator translator;
+	protected String foundAmountStr;
 	protected ChooseCSVFieldsWindow<T> csvWindow;
 	protected Label label;
 
@@ -37,13 +37,13 @@ public abstract class ResultControlRow<T> extends HorizontalLayout {
 	 * Use null for printBtn or csvBtn or csvWindow when those functionalities not needed.
 	 * If both printBtn and csvBtn are null, show only the amount of results.
 	 *
-	 * @param translator
+	 * @param foundAmountStr
 	 * @param printBtn the button to open a print dialog whose contents are implemented with getHtml
 	 * @param csvBtn the button from where to download the csv file
 	 * @param bottomMargin for the row
 	 */
-	public ResultControlRow(Translator translator, Button printBtn, Button csvBtn, boolean bottomMargin) {
-		this.translator = translator;
+	public ResultControlRow(String foundAmountStr, Button printBtn, Button csvBtn, boolean bottomMargin) {
+		this.foundAmountStr = foundAmountStr;
 		this.printBtn = printBtn;
 		this.csvBtn = csvBtn;
 		if(bottomMargin) {
@@ -54,8 +54,8 @@ public abstract class ResultControlRow<T> extends HorizontalLayout {
 		setResponsive(true);
 	}
 
-	public ResultControlRow(Translator translator, Label label, Button csvBtn) {
-		this.translator = translator;
+	public ResultControlRow(String foundAmountStr, Label label, Button csvBtn) {
+		this.foundAmountStr = foundAmountStr;
 		this.label = label;
 		this.csvBtn = csvBtn;
 		setSizeFull();
@@ -66,7 +66,7 @@ public abstract class ResultControlRow<T> extends HorizontalLayout {
 	public void createNewContents(Collection<T> searchResults, SearchBean queryBean) {
 		removeAllComponents();
 		if(searchResults != null) {
-			Label resultAmtText = new Label(translator.localize("Search.FoundAmount") + searchResults.size());
+			Label resultAmtText = new Label(foundAmountStr + searchResults.size());
 			resultAmtText.setId("FoundAmount");
 
 			if (searchResults.size() > 0) {
